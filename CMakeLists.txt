@@ -130,20 +130,23 @@ include(PkgConfig)
 # math.h/libm portability
 find_package(CMath REQUIRED)
 
+if(NOT gaen_MINEXT)
 # Release support
 include(Release)
 
 
 # Process subdirectories
 add_subdirectory(port)
+endif() # gaen_MINEXT
 add_subdirectory(libtiff)
+if(NOT gaen_MINEXT)
 add_subdirectory(tools)
 add_subdirectory(test)
 add_subdirectory(contrib)
 add_subdirectory(build)
 add_subdirectory(man)
 add_subdirectory(html)
-
+endif() # gaen_MINEXT
 
 message(STATUS "")
 message(STATUS "Libtiff is now configured for ${CMAKE_SYSTEM}")

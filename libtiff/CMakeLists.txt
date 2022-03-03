@@ -107,7 +107,11 @@ target_include_directories(tiff
 )
 
 if(ZIP_SUPPORT)
+if(gaen_MINEXT)
+  target_link_libraries(tiff PRIVATE zlibstatic)
+else()
   target_link_libraries(tiff PRIVATE ZLIB::ZLIB)
+endif() # gaen_MINEXT
 endif()
 if(ZIP_SUPPORT AND LIBDEFLATE_SUPPORT)
   target_link_libraries(tiff PRIVATE Deflate::Deflate)
@@ -157,6 +161,7 @@ install(TARGETS tiff
 install(FILES ${tiff_public_HEADERS}
         DESTINATION "${CMAKE_INSTALL_FULL_INCLUDEDIR}")
 
+if(NOT gaen_MINEXT)
 if(CXX_SUPPORT)
   set(tiffxx_HEADERS
           tiffio.hxx)
@@ -198,3 +203,4 @@ add_custom_target(faxtable
         COMMAND ${CMAKE_COMMAND} -E rm "tif_fax3sm.c"
         COMMAND mkg3states -b -c const "tif_fax3sm.c"
         WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}")
+endif() # gaen_MINEXT

@@ -124,8 +124,10 @@ include(WindowsSupport)
 # Orthogonal features
 include(LibraryFeatures)
 
+if(NOT gaen_MINEXT)
 # pkg-config support
 include(PkgConfig)
+endif() # gaen_MINEXT
 
 # math.h/libm portability
 find_package(CMath REQUIRED)

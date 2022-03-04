@@ -45,7 +45,11 @@ set(tiff_private_HEADERS
         ${CMAKE_CURRENT_BINARY_DIR}/tif_config.h)
 
 
+if(gaen_MINEXT)
+  add_library(tiff STATIC libtiff.def)
+else() # gaen_MINEXT
 add_library(tiff libtiff.def)
+endif() # gaen_MINEXT
 
 target_sources(tiff PRIVATE
         ${tiff_public_HEADERS}
@@ -153,6 +157,7 @@ if(HAVE_LD_VERSION_SCRIPT)
                         "-Wl,--version-script=${CMAKE_CURRENT_SOURCE_DIR}/libtiff.map")
 endif()
 
+if(NOT gaen_MINEXT)
 install(TARGETS tiff
         RUNTIME DESTINATION ${CMAKE_INSTALL_FULL_BINDIR}
         LIBRARY DESTINATION ${CMAKE_INSTALL_FULL_LIBDIR}
@@ -161,7 +166,6 @@ install(TARGETS tiff
 install(FILES ${tiff_public_HEADERS}
         DESTINATION "${CMAKE_INSTALL_FULL_INCLUDEDIR}")
 
-if(NOT gaen_MINEXT)
 if(CXX_SUPPORT)
   set(tiffxx_HEADERS
           tiffio.hxx)

@@ -148,7 +148,6 @@ add_subdirectory(contrib)
 add_subdirectory(build)
 add_subdirectory(man)
 add_subdirectory(html)
-endif() # gaen_MINEXT
 
 message(STATUS "")
 message(STATUS "Libtiff is now configured for ${CMAKE_SYSTEM}")
@@ -200,3 +199,4 @@ message(STATUS "")
 # message(STATUS "  X Athena Widgets support:           ${HAVE_XAW}")
 message(STATUS "  OpenGL support:                     ${HAVE_OPENGL}")
 message(STATUS "")
+endif() # gaen_MINEXT
